@@ -1,0 +1,31 @@
+<h3>Game info</h3>
+<div class="game">
+  <div>
+    <span>Name:</span>
+    <span>{{ game.name }}</span>
+  </div>
+  <div>
+    <span>Description:</span>
+    <span>{{ game.description }}</span>
+  </div>
+  <div>
+    <div>
+      <span>Genres:</span>
+    </div>
+    <div *ngFor="let gameGenre of game.gameXrefGenre ">
+      <span>{{ gameGenre.genre.name }}</span>
+    </div>
+  </div>
+  <div *ngIf="game.developer">
+    <a [routerLink]="['/developers', game.developer.developerId]">
+      <span>Developer:</span>
+      <span>{{ game.developer.name }}</span>
+    </a>
+  </div>
+  <div *ngIf="game.publisher">
+    <a [routerLink]="['/publishers', game.publisher.publisherId]">
+      <span>Publisher:</span>
+      <span>{{ game.publisher.name }}</span>
+    </a>
+  </div>
+</div>

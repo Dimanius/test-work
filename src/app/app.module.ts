@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { GamesComponent } from './games/games.component';
 import { DevelopersComponent } from './developers/developers.component';
 import { PublishersComponent } from './publishers/publishers.component';
+import { HttpClientModule } from '@angular/common/http';
+import { GameInfoComponent } from './game-info/game-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GamesComponent,
     DevelopersComponent,
-    PublishersComponent
+    PublishersComponent,
+    GameInfoComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
