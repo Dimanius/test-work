@@ -20,11 +20,9 @@ export class GameInfoComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.route.params['value'].id);
     this.gameService.getGame(this.route.params['value'].id)
       .subscribe((data) => {
         this.game = data;
-        console.log(this.game);
       });
 
   }

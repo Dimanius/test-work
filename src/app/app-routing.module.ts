@@ -4,7 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { GamesComponent }  from './games/games.component';
 import { GameInfoComponent }  from './game-info/game-info.component';
 import { DevelopersComponent }  from './developers/developers.component';
+import { DeveloperInfoComponent }  from './developer-info/developer-info.component';
 import { PublishersComponent }  from './publishers/publishers.component';
+import { PublisherInfoComponent }  from './publisher-info/publisher-info.component';
 
 const routes: Routes = [
   {
@@ -20,8 +22,16 @@ const routes: Routes = [
     component: DevelopersComponent
   },
   {
+    path: 'developers/:id',
+    component: DeveloperInfoComponent
+  },
+  {
     path: 'publishers',
     component: PublishersComponent
+  },
+  {
+    path: 'publishers/:id',
+    component: PublisherInfoComponent
   }
 ];
 

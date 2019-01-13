@@ -1,3 +1,8 @@
-<p>
-  publishers works!
-</p>
+<h2>publishers list</h2>
+<div class="container" *ngFor="let publisher of publishers">
+  <div class="card-publisher" [routerLink]="['/publishers', publisher.publisherId]">
+    <div class="card-publisher__name">
+      <span>name publisher: {{ publisher.name }}</span>
+    </div>
+  </div>
+</div>

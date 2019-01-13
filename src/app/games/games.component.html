@@ -1,14 +1,16 @@
-<div>
-  games works!
-  <div class="container" *ngFor="let game of games">
-    <div class="card-game" [routerLink]="['/games', game.gameId]">
-      <div class="card-game__name">
-        <span>name game: {{ game.name }}</span>
-      </div>
-      <div class="card-game__genres" *ngFor="let gameGenre of game.gameXrefGenre">
-        <span>genre:</span>
-        <span>{{ gameGenre.genre.name }}</span>
-      </div>
+<h2>games list</h2>
+<div class="container" *ngFor="let game of games">
+  <div class="card-game" [routerLink]="['/games', game.gameId]">
+    <div class="card-game__name">
+      <span>name game: {{ game.name }}</span>
     </div>
+      <div>
+        <div>
+          <span>Genres:</span>
+        </div>
+        <div *ngFor="let gameGenre of game.gameXrefGenre ">
+          <span>{{ gameGenre.genre.name }}</span>
+        </div>
+      </div>
   </div>
 </div>

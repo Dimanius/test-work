@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { PublishersService } from '../publishers.service';
 
 @Component({
   selector: 'app-publishers',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublishersComponent implements OnInit {
 
-  constructor() { }
+  publishers: any = [];
+
+  constructor(private publisherService: PublishersService) { }
 
   ngOnInit() {
+    this.publisherService.getPublishers()
+      .subscribe((data) => {
+        this.publishers = data;
+      });
   }
 
 }

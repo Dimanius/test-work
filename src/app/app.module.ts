@@ -3,19 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GamesComponent } from './games/games.component';
-import { DevelopersComponent } from './developers/developers.component';
-import { PublishersComponent } from './publishers/publishers.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GamesComponent } from './games/games.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { DevelopersComponent } from './developers/developers.component';
+import { DeveloperInfoComponent } from './developer-info/developer-info.component';
+import { PublishersComponent } from './publishers/publishers.component';
+import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GamesComponent,
+    GameInfoComponent,
     DevelopersComponent,
+    DeveloperInfoComponent,
     PublishersComponent,
-    GameInfoComponent
+    PublisherInfoComponent
   ],
   imports: [
     BrowserModule,
