@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { DevelopersComponent } from './developers/developers.component';
 import { DeveloperInfoComponent } from './developer-info/developer-info.component';
 import { PublishersComponent } from './publishers/publishers.component';
 import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
+import { DevelopersEditComponent } from './developers-edit/developers-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { PublisherInfoComponent } from './publisher-info/publisher-info.componen
     DevelopersComponent,
     DeveloperInfoComponent,
     PublishersComponent,
-    PublisherInfoComponent
+    PublisherInfoComponent,
+    DevelopersEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

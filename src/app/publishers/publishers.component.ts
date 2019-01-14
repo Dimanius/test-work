@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PublishersService } from '../publishers.service';
+import { Publisher } from '../models/publisher.model';
 
 @Component({
   selector: 'app-publishers',
@@ -10,11 +11,11 @@ import { PublishersService } from '../publishers.service';
 })
 export class PublishersComponent implements OnInit {
 
-  publishers: any = [];
+  publishers: Publisher[] = [];
 
   constructor(private publisherService: PublishersService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.publisherService.getPublishers()
       .subscribe((data) => {
         this.publishers = data;

@@ -18,7 +18,7 @@ export class DeveloperInfoComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.developerService.getDeveloper(this.route.params['value'].id)
       .subscribe((data) => {

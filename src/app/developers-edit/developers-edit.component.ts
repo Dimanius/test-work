@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DevelopersService } from '../developers.service';
-import { Developer } from '../models/developer.model';
 
 @Component({
-  selector: 'app-developers',
-  templateUrl: './developers.component.html',
-  styleUrls: ['./developers.component.scss']
+  selector: 'app-developers-edit',
+  templateUrl: './developers-edit.component.html',
+  styleUrls: ['./developers-edit.component.scss']
 })
-export class DevelopersComponent implements OnInit {
+export class DevelopersEditComponent implements OnInit {
 
-  developers: Developer[];
+  developers: any = [];
 
   constructor(private developerService: DevelopersService) { }
 

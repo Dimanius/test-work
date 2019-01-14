@@ -18,7 +18,7 @@ export class GameInfoComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.gameService.getGame(this.route.params['value'].id)
       .subscribe((data) => {

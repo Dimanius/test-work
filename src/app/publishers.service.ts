@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { Publisher } from './models/publisher.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,15 +13,15 @@ export class PublishersService {
 
   constructor(private http: HttpClient) { }
 
-  getPublishers(): Observable<any> {
+  getPublishers(): Observable<Publisher[]> {
 
-    return this.http.get(this.url);
+    return this.http.get<Publisher[]>(this.url);
 
   }
 
-  getPublisher(id: number): Observable<any> {
+  getPublisher(id: number): Observable<Publisher> {
 
-    return this.http.get(this.url + '/' + id);
+    return this.http.get<Publisher>(this.url + '/' + id);
 
   }
 

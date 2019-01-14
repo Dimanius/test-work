@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { Game } from './models/game.model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,15 +13,15 @@ export class GamesService {
 
   constructor(private http: HttpClient) { }
 
-  getGames(): Observable<any> {
+  getGames(): Observable<Game[]> {
 
-    return this.http.get(this._url);
+    return this.http.get<Game[]>(this._url);
 
   }
 
-  getGame(id: number): Observable<any> {
+  getGame(id: number): Observable<Game> {
 
-    return this.http.get(this._url + '/' + id);
+    return this.http.get<Game>(this._url + '/' + id);
 
   }
 

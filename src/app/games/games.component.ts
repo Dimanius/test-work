@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { GamesService } from '../games.service';
+import { Game } from '../models/game.model';
 
 @Component({
   selector: 'app-games',
@@ -10,12 +11,12 @@ import { GamesService } from '../games.service';
 })
 export class GamesComponent implements OnInit {
 
-  games: any = [];
+  games: Game[] = [];
 
   constructor(private gameService: GamesService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.gameService.getGames()
       .subscribe((data) => {

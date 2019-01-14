@@ -18,12 +18,11 @@ export class PublisherInfoComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.publisherService.getPublisher(this.route.params['value'].id)
       .subscribe((data) => {
         this.publisher = data;
-        console.log(this.publisher);
       });
 
   }

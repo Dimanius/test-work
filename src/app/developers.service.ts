@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { Developer } from './models/developer.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,15 +13,15 @@ export class DevelopersService {
 
   constructor(private http: HttpClient) { }
 
-  getDevelopers(): Observable<any> {
+  getDevelopers(): Observable<Developer[]> {
 
-    return this.http.get(this.url);
+    return this.http.get<Developer[]>(this.url);
 
   }
 
-  getDeveloper(id: number): Observable<any> {
+  getDeveloper(id: number): Observable<Developer> {
 
-    return this.http.get(this.url + '/' + id);
+    return this.http.get<Developer>(this.url + '/' + id);
 
   }
 
