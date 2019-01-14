@@ -24,4 +24,16 @@ export class DevelopersComponent implements OnInit {
 
   }
 
+  addDeveloper(name: string):void {
+
+    let data = {
+      developerId: 0,
+      name: name,
+      game: []
+    } as Developer;
+
+    this.developerService.addDeveloper(data);
+
+  }
+
 }

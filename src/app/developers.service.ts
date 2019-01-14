@@ -25,5 +25,12 @@ export class DevelopersService {
 
   }
 
+  addDeveloper(developer: Developer): void {
+
+    console.log(developer);
+    // return this.http.post<Developer>(this.url + '/' + id);
+
+  }
+
 
 }

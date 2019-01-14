@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { DevelopersService } from '../developers.service';
+import { Developer } from '../models/developer.model';
 
 @Component({
   selector: 'app-developer-info',
@@ -11,7 +12,7 @@ import { DevelopersService } from '../developers.service';
 })
 export class DeveloperInfoComponent implements OnInit {
 
-  developer: any = {};
+  developer: Developer;
 
   constructor(
     private developerService: DevelopersService,
@@ -23,7 +24,6 @@ export class DeveloperInfoComponent implements OnInit {
     this.developerService.getDeveloper(this.route.params['value'].id)
       .subscribe((data) => {
         this.developer = data;
-        console.log(this.developer);
       });
 
   }

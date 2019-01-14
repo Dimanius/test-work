@@ -1,28 +1,18 @@
 <h3>developer info</h3>
 <div class="developer">
+  <span>Name: </span>{{ developer.name }}
   <div>
-    <span>Name: </span>{{ developer.name }}
-  </div>
-  <div>
-    <div>
-      <span>Games:</span>
-    </div>
+    <span>Games:</span>
     <div *ngFor="let game of developer.game">
+      <span>Game: </span>{{ game.name }}
       <div>
-        <span>Games: </span>{{ game.name }}
-      </div>
-      <div>
-        <div>
-          <span>Genres:</span>
-        </div>
+        <span>Genres:</span>
         <div *ngFor="let gameGenre of game.gameXrefGenre ">
           <span>{{ gameGenre.genre.name }}</span>
         </div>
       </div>
       <div *ngIf="game.developerId">
-        <a [routerLink]="['/games', game.gameId]">
-          <span>full information</span>
-        </a>
+        <a [routerLink]="['/games', game.gameId]">full information</a>
       </div>
     </div>
   </div>

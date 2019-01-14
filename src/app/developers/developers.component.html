@@ -1,8 +1,16 @@
 <h2>developers list</h2>
-<div class="container" *ngFor="let developer of developers">
-  <div class="card-developer" [routerLink]="['/developers', developer.developerId]">
-    <div class="card-developer__name">
-      <span>developer: {{ developer.name }}</span>
-    </div>
-  </div>
+<div>
+  <label>Developer name:
+    <input #developerName />
+  </label>
+  <button (click)="addDeveloper(developerName.value); developerName.value=''">
+    add
+  </button>
 </div>
+<ul class="container">
+  <li *ngFor="let developer of developers">
+    <a class="card-name" [routerLink]="['/developers', developer.developerId]">
+      <span>{{ developer.name }}</span>
+    </a>
+  </li>
+</ul>
