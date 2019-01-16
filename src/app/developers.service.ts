@@ -9,7 +9,7 @@ import { Developer } from './models/developer.model';
 })
 export class DevelopersService {
 
-  private url: string = "http://pulter.tv/0CD29A8C-8968-4D0F-9F00-921DDDD938C3/api/developers";
+  private url: string = 'http://pulter.tv/0CD29A8C-8968-4D0F-9F00-921DDDD938C3/api/developers';
 
   constructor(private http: HttpClient) { }
 

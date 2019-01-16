@@ -12,7 +12,11 @@ import { Developer } from '../models/developer.model';
 })
 export class DeveloperInfoComponent implements OnInit {
 
-  developer: Developer;
+  developer: Developer = {
+    developerId: 0,
+    name: '',
+    game: []
+  };
 
   constructor(
     private developerService: DevelopersService,

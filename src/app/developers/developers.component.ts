@@ -19,34 +19,38 @@ export class DevelopersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.developerService.getDevelopers()
-    .subscribe((data) => {
-      this.developers = data;
-    });
+    this.loadDevelopers();
 
   }
 
   addDeveloper(name: string):void {
 
-    let data = {
+    let newDeveloper = {
       developerId: 0,
       name: name,
       game: []
     } as Developer;
 
-    this.developerService.addDeveloper(data).subscribe((data) => {
-      console.log(data);
+    this.developerService.addDeveloper(newDeveloper).subscribe(_ => {
+      this.loadDevelopers();
     });
 
   }
 
   deleteDeveloper(developer: Developer): void {
 
-    this.developers = this.developers.filter(d => d !== developer);
-
     this.developerService.deleteDeveloper(developer.developerId)
+    .subscribe(_ => {
+      this.loadDevelopers();
+    });
+
+  }
+
+  loadDevelopers() {
+
+    this.developerService.getDevelopers()
     .subscribe((data) => {
-      console.log(data);
+      this.developers = data;
     });
 
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { PublishersService } from '../publishers.service';
+import { Publisher } from '../models/publisher.model';
 
 @Component({
   selector: 'app-publisher-info',
@@ -11,7 +12,7 @@ import { PublishersService } from '../publishers.service';
 })
 export class PublisherInfoComponent implements OnInit {
 
-  publisher: any = {};
+  publisher: Publisher;
 
   constructor(
     private publisherService: PublishersService,
