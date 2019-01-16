@@ -25,12 +25,16 @@ export class DevelopersService {
 
   }
 
-  addDeveloper(developer: Developer): void {
+  addDeveloper(developer: Developer): Observable<any> {
 
-    console.log(developer);
-    // return this.http.post<Developer>(this.url + '/' + id);
+    return this.http.post<Developer>(this.url, developer);
 
   }
 
+  deleteDeveloper(id: number): Observable<any> {
+
+    return this.http.delete(this.url + '/' + id);
+
+  }
 
 }

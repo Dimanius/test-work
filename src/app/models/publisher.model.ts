@@ -4,6 +4,6 @@ export interface Publisher {
 
   publisherId: number,
   name: string,
-  game: Game
+  game?: Game[]
 
 }

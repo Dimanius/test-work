@@ -13,14 +13,16 @@ export class DevelopersComponent implements OnInit {
 
   developers: Developer[];
 
-  constructor(private developerService: DevelopersService) { }
+  constructor(
+    private developerService: DevelopersService,
+  ) { }
 
   ngOnInit(): void {
 
     this.developerService.getDevelopers()
-      .subscribe((data) => {
-        this.developers = data;
-      });
+    .subscribe((data) => {
+      this.developers = data;
+    });
 
   }
 
@@ -32,7 +34,20 @@ export class DevelopersComponent implements OnInit {
       game: []
     } as Developer;
 
-    this.developerService.addDeveloper(data);
+    this.developerService.addDeveloper(data).subscribe((data) => {
+      console.log(data);
+    });
+
+  }
+
+  deleteDeveloper(developer: Developer): void {
+
+    this.developers = this.developers.filter(d => d !== developer);
+
+    this.developerService.deleteDeveloper(developer.developerId)
+    .subscribe((data) => {
+      console.log(data);
+    });
 
   }
 

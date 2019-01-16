@@ -12,5 +12,6 @@
     <a class="card-name" [routerLink]="['/developers', developer.developerId]">
       <span>{{ developer.name }}</span>
     </a>
+    <button class="close" (click)="deleteDeveloper(developer)">X</button>
   </li>
 </ul>
