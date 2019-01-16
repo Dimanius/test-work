@@ -1,0 +1,32 @@
+.developer {
+  display: flex;
+  border: 1px solid black;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 200px;
+  padding: 10px;
+
+  .developer-name {
+    display: contents;
+  }
+
+  .developer-game {
+    padding-left: 20px;
+
+    a {
+      padding: 5px 10px;
+      text-decoration: none;
+      margin-top: 10px;
+      display: inline-block;
+      color: #607d8b;
+      background-color: #eee;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    a:hover {
+      color: #039be5;
+    }
+  }
+}
