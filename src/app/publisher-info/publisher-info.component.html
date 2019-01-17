@@ -1,30 +1,22 @@
 <h3>Publisher info</h3>
-<div class="publisher">
-  <div>
-    <span>Name:</span>
-    <span>{{ publisher.name }}</span>
-  </div>
-  <div>
-    <div>
-      <span>Games:</span>
-    </div>
-    <div *ngFor="let game of publisher.game">
+<span class="header-name">Name: </span>
+<input [(ngModel)]="publisher.name"/>
+<button (click)="updatePublisher()">save</button>
+<div>
+  Games:
+  <div class="container">
+    <div class="item" *ngFor="let game of publisher.game">
+      <span>Name: </span>{{ game.name }}
       <div>
-        <span>Game:</span>
-        <span>{{ game.name }}</span>
-      </div>
-      <div>
-        <div>
-          <span>Genres:</span>
-        </div>
-        <div *ngFor="let gameGenre of game.gameXrefGenre ">
-          <span>{{ gameGenre.genre.name }}</span>
-        </div>
+        Genres:
+        <ul>
+          <li *ngFor="let gameGenre of game.gameXrefGenre ">
+            {{ gameGenre.genre.name }}
+          </li>
+        </ul>
       </div>
       <div *ngIf="game.developerId">
-        <a [routerLink]="['/games', game.gameId]">
-          <span>full information</span>
-        </a>
+        <a [routerLink]="['/games', game.gameId]">game info</a>
       </div>
     </div>
   </div>

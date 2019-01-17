@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 200px;
+  padding: 10px;
+
+  .header-name {
+    display: contents;
+  }
+
+  .header-game {
+    padding-left: 20px;
+
+    a {
+      padding: 5px 10px;
+      text-decoration: none;
+      margin-top: 10px;
+      display: inline-block;
+      color: #607d8b;
+      background-color: #eee;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    a:hover {
+      color: #039be5;
+    }
+  }
+
+  .item {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    background-color: lightgrey;
+  }
+}

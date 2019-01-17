@@ -1,5 +1,5 @@
 .container {
-  width: 15em;
+  width: 20em;
 }
 
 .container li {
@@ -7,9 +7,9 @@
   cursor: pointer;
   list-style: none;
   background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
+  margin: 5px;
+  padding: 4px 0;
+  height: 25px;
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
@@ -18,7 +18,22 @@
 .container li:hover {
   color: #607D8B;
   background-color: #DDD;
-  left: .1em;
+}
+
+.container li input {
+  align-self: center;
+}
+
+.container li button {
+  height: 30px;
+  display: none;
+  align-self: center;
+}
+
+.container li:hover {
+  button {
+    display: flex;
+  }
 }
 
 .container a {

@@ -25,4 +25,22 @@ export class PublishersService {
 
   }
 
+  addPublisher(publisher: Publisher): Observable<any> {
+
+    return this.http.post(this.url, publisher);
+
+  }
+
+  updatePublisher(publisher: Publisher): Observable<any> {
+
+    return this.http.put(this.url + '/' + publisher.publisherId, publisher);
+
+  }
+
+  deletePublisher(id: number): Observable<any> {
+
+    return this.http.delete(this.url + '/' + id);
+
+  }
+
 }

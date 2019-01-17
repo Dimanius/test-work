@@ -12,7 +12,11 @@ import { Publisher } from '../models/publisher.model';
 })
 export class PublisherInfoComponent implements OnInit {
 
-  publisher: Publisher;
+  publisher: Publisher = {
+    publisherId: 0,
+    name: '',
+    game: []
+  };
 
   constructor(
     private publisherService: PublishersService,
@@ -20,6 +24,21 @@ export class PublisherInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.loadPublisher();
+
+  }
+
+  updatePublisher(): void {
+
+    this.publisherService.updatePublisher(this.publisher)
+      .subscribe( _ => {
+        this.loadPublisher();
+      });
+
+  }
+
+  loadPublisher(): void {
 
     this.publisherService.getPublisher(this.route.params['value'].id)
       .subscribe((data) => {

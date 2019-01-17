@@ -1,0 +1,16 @@
+<h2>genres list</h2>
+<div>
+  <label>Genre:
+    <input #genreName />
+  </label>
+  <button (click)="addGenre(genreName.value); genreName.value=''">
+    add
+  </button>
+</div>
+<ul class="container">
+  <li *ngFor="let genre of genres">
+    name: <input [(ngModel)]="genre.name"/>
+    <button (click)="updateGenre(genre)">save</button>
+  </li>
+</ul>
+

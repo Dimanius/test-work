@@ -1,8 +1,17 @@
 <h2>publishers list</h2>
-<div class="container" *ngFor="let publisher of publishers">
-  <div class="card-publisher" [routerLink]="['/publishers', publisher.publisherId]">
-    <div class="card-publisher__name">
-      <span>name publisher: {{ publisher.name }}</span>
-    </div>
-  </div>
+<div>
+  <label>Publisher name:
+    <input #publisherName />
+  </label>
+  <button (click)="addPublisher(publisherName.value); publisherName.value=''">
+    add
+  </button>
 </div>
+<ul class="container">
+  <li *ngFor="let publisher of publishers">
+    <a class="card-name" [routerLink]="['/publishers', publisher.publisherId]">
+      <span>{{ publisher.name }}</span>
+    </a>
+    <button class="close" (click)="deletePublisher(publisher)">X</button>
+  </li>
+</ul>

@@ -30,10 +30,12 @@ export class DeveloperInfoComponent implements OnInit {
   }
 
   updateDeveloper(): void {
+
     this.developerService.updateDeveloper(this.developer)
       .subscribe( _ => {
         this.loadDeveloper();
       });
+
   }
 
   loadDeveloper(): void {

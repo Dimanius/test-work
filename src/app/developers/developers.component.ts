@@ -31,7 +31,7 @@ export class DevelopersComponent implements OnInit {
       game: []
     } as Developer;
 
-    this.developerService.addDeveloper(newDeveloper).subscribe(_ => {
+    this.developerService.addDeveloper(newDeveloper).subscribe( _ => {
       this.loadDevelopers();
     });
 

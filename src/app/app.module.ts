@@ -12,6 +12,7 @@ import { DeveloperInfoComponent } from './developer-info/developer-info.componen
 import { PublishersComponent } from './publishers/publishers.component';
 import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
 import { DevelopersEditComponent } from './developers-edit/developers-edit.component';
+import { GenresComponent } from './genres/genres.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DevelopersEditComponent } from './developers-edit/developers-edit.compo
     DeveloperInfoComponent,
     PublishersComponent,
     PublisherInfoComponent,
-    DevelopersEditComponent
+    DevelopersEditComponent,
+    GenresComponent
   ],
   imports: [
     BrowserModule,
