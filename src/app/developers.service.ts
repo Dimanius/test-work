@@ -27,7 +27,13 @@ export class DevelopersService {
 
   addDeveloper(developer: Developer): Observable<any> {
 
-    return this.http.post<Developer>(this.url, developer);
+    return this.http.post(this.url, developer);
+
+  }
+
+  updateDeveloper(developer: Developer): Observable<any> {
+
+    return this.http.put(this.url + '/' + developer.developerId, developer);
 
   }
 

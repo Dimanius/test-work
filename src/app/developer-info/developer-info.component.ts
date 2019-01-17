@@ -25,6 +25,19 @@ export class DeveloperInfoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.loadDeveloper();
+
+  }
+
+  updateDeveloper(): void {
+    this.developerService.updateDeveloper(this.developer)
+      .subscribe( _ => {
+        this.loadDeveloper();
+      });
+  }
+
+  loadDeveloper(): void {
+
     this.developerService.getDeveloper(this.route.params['value'].id)
       .subscribe((data) => {
         this.developer = data;

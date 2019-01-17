@@ -1,17 +1,16 @@
-.developer {
+.container {
   display: flex;
-  border: 1px solid black;
   justify-content: space-between;
   flex-direction: column;
   flex-wrap: wrap;
   max-width: 200px;
   padding: 10px;
 
-  .developer-name {
+  .header-name {
     display: contents;
   }
 
-  .developer-game {
+  .header-game {
     padding-left: 20px;
 
     a {
@@ -28,5 +27,13 @@
     a:hover {
       color: #039be5;
     }
+  }
+
+  .item {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    background-color: lightgrey;
   }
 }

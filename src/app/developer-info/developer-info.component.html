@@ -1,21 +1,23 @@
 <h3>developer info</h3>
-<div class="developer">
-  <span class="developer-name">Name: </span>{{ developer.name }}
+  <span class="header-name">Name: </span>
+  <input [(ngModel)]="developer.name"/>
+  <button (click)="updateDeveloper()">save</button>
   <div>
     Games:
-    <div class="developer-game" *ngFor="let game of developer.game">
-      <span>Name: </span>{{ game.name }}
-      <div>
-        Genres:
-        <ul>
-          <li *ngFor="let gameGenre of game.gameXrefGenre ">
-            {{ gameGenre.genre.name }}
-          </li>
-        </ul>
+    <div class="container">
+      <div class="item" *ngFor="let game of developer.game">
+        <span>Name: </span>{{ game.name }}
+        <div>
+          Genres:
+          <ul>
+            <li *ngFor="let gameGenre of game.gameXrefGenre ">
+              {{ gameGenre.genre.name }}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="game.developerId">
+          <a [routerLink]="['/games', game.gameId]">game info</a>
+        </div>
       </div>
-      <div *ngIf="game.developerId">
-        <a [routerLink]="['/games', game.gameId]">full information</a>
-      </div>
-    </div>
   </div>
 </div>
