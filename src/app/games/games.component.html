@@ -1,16 +1,26 @@
+<ul class="container">
+</ul>
 <h2>games list</h2>
-<div class="container" *ngFor="let game of games">
-  <div class="card-game" [routerLink]="['/games', game.gameId]">
-    <div class="card-game__name">
-      <span>name game: {{ game.name }}</span>
-    </div>
-      <div>
-        <div>
-          <span>Genres:</span>
-        </div>
-        <div *ngFor="let gameGenre of game.gameXrefGenre ">
-          <span>{{ gameGenre.genre.name }}</span>
-        </div>
-      </div>
-  </div>
+<div>
+  <label>Developer name:
+    <input #developerName />
+  </label>
+  <button (click)="addDeveloper(developerName.value); developerName.value=''">
+    add
+  </button>
 </div>
+<ul class="container">
+  <li class="list" *ngFor="let game of games">
+    <a class="card-name" [routerLink]="['/games', game.gameId]">
+      <span>Game: {{ game.name }}</span>
+      <div>Genres:
+        <ul>
+          <li *ngFor="let gameGenre of game.gameXrefGenre">
+            {{gameGenre.genre.name}}
+          </li>
+        </ul>
+      </div>
+    </a>
+    <button class="close" (click)="deleteGame(game)">X</button>
+  </li>
+</ul>
