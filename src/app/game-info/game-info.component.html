@@ -1,12 +1,10 @@
 <h3>Game info</h3>
 <div class="game">
   <div>
-    <span>Name:</span>
-    <span>{{ game.name }}</span>
+    <span>Name:</span> {{ game.name }}
   </div>
   <div>
-    <span>Description:</span>
-    <span>{{ game.description }}</span>
+    <span>Description:</span> {{ game.description }}
   </div>
   <div>
     <div>
@@ -18,14 +16,12 @@
   </div>
   <div *ngIf="game.developer">
     <a [routerLink]="['/developers', game.developer.developerId]">
-      <span>Developer:</span>
-      <span>{{ game.developer.name }}</span>
+      <span>Developer:</span> {{ game.developer.name }}
     </a>
   </div>
   <div *ngIf="game.publisher">
     <a [routerLink]="['/publishers', game.publisher.publisherId]">
-      <span>Publisher:</span>
-      <span>{{ game.publisher.name }}</span>
+      <span>Publisher:</span> {{ game.publisher.name }}
     </a>
   </div>
 </div>

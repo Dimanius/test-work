@@ -2,12 +2,31 @@
 </ul>
 <h2>games list</h2>
 <div>
-  <label>Developer name:
-    <input #developerName />
-  </label>
-  <button (click)="addDeveloper(developerName.value); developerName.value=''">
-    add
-  </button>
+  <form #formGame="ngForm" (ngSubmit)="createGame(formGame)">
+    <label>Game name*:
+      <input name="name" ngModel required/>
+    </label>
+    <label>Description*:
+      <input name="description" ngModel required/>
+    </label>
+    <label>Developer*:
+      <select [ngModel]="developers" name="developerId" required>
+        <option *ngFor="let developer of developers"
+          [value]="developer.developerId">
+          {{developer.name}}
+        </option>
+      </select>
+    </label>
+    <label>Publishers:
+      <select [ngModel]="publishers" name="publisherId">
+        <option *ngFor="let publisher of publishers"
+          [value]="publisher.publisherId">
+          {{publisher.name}}
+        </option>
+      </select>
+    </label>
+    <button type="submit">add game</button>
+  </form>
 </div>
 <ul class="container">
   <li class="list" *ngFor="let game of games">
