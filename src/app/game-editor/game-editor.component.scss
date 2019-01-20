@@ -3,6 +3,10 @@ form {
   flex-direction: column;
 }
 
+select {
+  max-width: 200px;
+}
+
 label {
   margin-bottom: 5px;
 }

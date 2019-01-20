@@ -90,8 +90,6 @@ export class GameEditorComponent implements OnInit {
 
     if (!game.publisherId) { delete(game.publisherId); }
 
-    console.log(this.updateGanresForGame());
-
     this.gameService.updateGame(game)
     .pipe(switchMap(_ => this.updateGanresForGame()))
     .pipe(switchMap(_ => this.loadGame()))
