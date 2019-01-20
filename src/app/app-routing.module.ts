@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { GamesComponent } from './games/games.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { GameEditorComponent } from './game-editor/game-editor.component';
 import { GenresComponent } from './genres/genres.component';
 import { DevelopersComponent } from './developers/developers.component';
-import { DevelopersEditComponent } from './developers-edit/developers-edit.component';
 import { DeveloperInfoComponent } from './developer-info/developer-info.component';
 import { PublishersComponent } from './publishers/publishers.component';
 import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'games/:id',
     component: GameInfoComponent
+  },
+  {
+    path: 'games/:id/editor',
+    component: GameEditorComponent
   },
   {
     path: 'genres',

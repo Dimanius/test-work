@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { GamesService } from '../games.service';
+import { Game } from '../models/game.model';
 
 @Component({
   selector: 'app-game-info',
@@ -11,7 +12,14 @@ import { GamesService } from '../games.service';
 })
 export class GameInfoComponent implements OnInit {
 
-  game: any = {};
+  game: Game = {
+    gameId: 0,
+    name: '',
+    description: '',
+    developerId: 0,
+    developer: [],
+    publisher: [],
+  };
 
   constructor(
     private gameService: GamesService,

@@ -1,6 +1,4 @@
-<ul class="container">
-</ul>
-<h2>games list</h2>
+<h2>Form game</h2>
 <div>
   <form #formGame="ngForm" (ngSubmit)="createGame(formGame)">
     <label>Game name*:
@@ -17,7 +15,7 @@
         </option>
       </select>
     </label>
-    <label>Publishers:
+    <label>Publisher:
       <select [ngModel]="publishers" name="publisherId">
         <option *ngFor="let publisher of publishers"
           [value]="publisher.publisherId">
@@ -28,6 +26,7 @@
     <button type="submit">add game</button>
   </form>
 </div>
+<h2>games list</h2>
 <ul class="container">
   <li class="list" *ngFor="let game of games">
     <a class="card-name" [routerLink]="['/games', game.gameId]">

@@ -11,8 +11,8 @@ import { DevelopersComponent } from './developers/developers.component';
 import { DeveloperInfoComponent } from './developer-info/developer-info.component';
 import { PublishersComponent } from './publishers/publishers.component';
 import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
-import { DevelopersEditComponent } from './developers-edit/developers-edit.component';
 import { GenresComponent } from './genres/genres.component';
+import { GameEditorComponent } from './game-editor/game-editor.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ import { GenresComponent } from './genres/genres.component';
     DeveloperInfoComponent,
     PublishersComponent,
     PublisherInfoComponent,
-    DevelopersEditComponent,
-    GenresComponent
+    GenresComponent,
+    GameEditorComponent
   ],
   imports: [
     BrowserModule,

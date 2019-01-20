@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
 import { GamesService } from '../games.service';
 import { DevelopersService } from '../developers.service';
 import { PublishersService } from '../publishers.service';
@@ -9,33 +9,43 @@ import { GenresService } from '../genres.service';
 import { Game } from '../models/game.model';
 import { Developer } from '../models/developer.model';
 import { Publisher } from '../models/publisher.model';
+import { Genre } from '../models/genre.model';
 
 @Component({
-  selector: 'app-games',
-  templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss'],
+  selector: 'app-game-editor',
+  templateUrl: './game-editor.component.html',
+  styleUrls: ['./game-editor.component.scss']
 })
-export class GamesComponent implements OnInit {
+export class GameEditorComponent implements OnInit {
 
-  games: Game[] = [];
-  publishers: Publisher[] = [];
+  game: Game = {
+    gameId: 0,
+    name: '',
+    description: '',
+    developerId: 0,
+    publisherId: 0,
+  };
+
+  publishers: Publisher[];
   developers: Developer[];
+  genres: Genre[];
 
   constructor(
     private gameService: GamesService,
     private developerService: DevelopersService,
     private publisherService: PublishersService,
-    private genreService: GenresService
+    private genreService: GenresService,
+    private route: ActivatedRoute,
   ) {
 
     this.loadAllInfo();
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  createGame(formGame: NgForm): void {
+  updateGame(formGame: NgForm): void {
 
     if (formGame.form.status === "INVALID") return alert("fill all requied fields");
 
@@ -46,20 +56,18 @@ export class GamesComponent implements OnInit {
       publisherId,
     } = formGame.form.value;
 
-    let newGame: Game = {
-      gameId: 0,
+    let game: Game = {
+      gameId: this.game.gameId,
       name: name,
       description: description,
       developerId: Number(developerId),
       publisherId: Number(publisherId),
     };
 
-    this.gameService.addGame(newGame)
+    this.gameService.updateGame(game)
       .subscribe(_ => {
-        this.loadGames();
+        this.loadAllInfo();
     });
-
-    formGame.form.reset();
 
   }
 
@@ -74,17 +82,18 @@ export class GamesComponent implements OnInit {
 
   loadAllInfo() {
 
-    this.loadGames();
     this.loadDevelopers();
     this.loadPublishers();
+    this.loadGenres();
+    this.loadGame();
 
   }
 
-  loadGames() {
+  loadGame() {
 
-    this.gameService.getGames()
+    this.gameService.getGame(this.route.params['value'].id)
       .subscribe((data) => {
-        this.games = data;
+        this.game = data;
       });
 
   }
@@ -103,6 +112,15 @@ export class GamesComponent implements OnInit {
     this.publisherService.getPublishers()
       .subscribe((data) => {
         this.publishers = data;
+      });
+
+  }
+
+  loadGenres() {
+
+    this.genreService.getGenres()
+      .subscribe((data) => {
+        this.genres = data;
       });
 
   }

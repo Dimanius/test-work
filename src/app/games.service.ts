@@ -27,8 +27,14 @@ export class GamesService {
 
   addGame(game: Game): Observable<any> {
 
-    console.log(game);
     return this.http.post(this.url, game);
+
+  }
+
+  updateGame(game: Game): Observable<any> {
+
+    console.log(game);
+    return this.http.put(this.url + '/' + game.gameId, game);
 
   }
 

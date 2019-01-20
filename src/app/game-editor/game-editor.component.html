@@ -1,0 +1,28 @@
+<h2>Edit game</h2>
+<form #formGame="ngForm" (ngSubmit)="updateGame(formGame)">
+  <label>Game name*:
+    <input name="name" [ngModel]="game.name" required/>
+  </label>
+  <label>Description*:
+    <input name="description" [ngModel]="game.description" required/>
+  </label>
+  <label>Developer*:
+    <select [ngModel]="developers" name="developerId" required>
+      <option *ngFor="let developer of developers"
+        [selected]="developer.developerId == game.developerId"
+        [value]="developer.developerId">
+      {{developer.name}}
+      </option>
+    </select>
+  </label>
+  <label>Publisher:
+    <select [ngModel]="publishers" name="publisherId">
+      <option *ngFor="let publisher of publishers"
+        [value]="publisher.publisherId"
+        [selected]="publisher.publisherId == game.publisherId">
+        {{publisher.name}}
+      </option>
+    </select>
+  </label>
+  <button type="submit">edit game</button>
+</form>

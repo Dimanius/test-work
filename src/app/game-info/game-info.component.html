@@ -2,19 +2,20 @@
 <div class="game">
   <div>
     <span>Name:</span> {{ game.name }}
+    <a [routerLink]="['/games/', game.gameId, 'editor']">edit game</a>
   </div>
   <div>
     <span>Description:</span> {{ game.description }}
   </div>
   <div>
-    <div>
-      <span>Genres:</span>
-    </div>
-    <div *ngFor="let gameGenre of game.gameXrefGenre ">
-      <span>{{ gameGenre.genre.name }}</span>
-    </div>
+    Genres:
+    <ul>
+      <li *ngFor="let gameGenre of game.gameXrefGenre ">
+        {{ gameGenre.genre.name }}
+      </li>
+    </ul>
   </div>
-  <div *ngIf="game.developer">
+  <div>
     <a [routerLink]="['/developers', game.developer.developerId]">
       <span>Developer:</span> {{ game.developer.name }}
     </a>
