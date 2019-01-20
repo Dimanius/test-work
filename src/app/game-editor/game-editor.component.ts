@@ -64,6 +64,8 @@ export class GameEditorComponent implements OnInit {
       publisherId: Number(publisherId),
     };
 
+    if (!game.publisherId) delete(game.publisherId);
+
     this.gameService.updateGame(game)
       .subscribe(_ => {
         this.loadAllInfo();

@@ -7,16 +7,16 @@
     <input name="description" [ngModel]="game.description" required/>
   </label>
   <label>Developer*:
-    <select [ngModel]="developers" name="developerId" required>
+    <select [ngModel]="game.developerId" name="developerId" required>
       <option *ngFor="let developer of developers"
         [selected]="developer.developerId == game.developerId"
         [value]="developer.developerId">
-      {{developer.name}}
+        {{developer.name}}
       </option>
     </select>
   </label>
   <label>Publisher:
-    <select [ngModel]="publishers" name="publisherId">
+    <select [ngModel]="game.publisherId" name="publisherId">
       <option *ngFor="let publisher of publishers"
         [value]="publisher.publisherId"
         [selected]="publisher.publisherId == game.publisherId">
