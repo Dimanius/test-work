@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { GamesService } from '../games.service';
 import { DevelopersService } from '../developers.service';
 import { PublishersService } from '../publishers.service';
 import { GenresService } from '../genres.service';
+import { GameXrefGenresService } from '../game-xref-genres.service';
 import { Game } from '../models/game.model';
 import { Developer } from '../models/developer.model';
 import { Publisher } from '../models/publisher.model';
@@ -24,37 +26,59 @@ export class GameEditorComponent implements OnInit {
     description: '',
     developerId: 0,
     publisherId: 0,
+    gameXrefGenre: []
   };
 
-  publishers: Publisher[];
+  gameForm: FormGroup;
+  publishers: Publisher[] = [];
+  genres: Genre[] = [];
   developers: Developer[];
-  genres: Genre[];
 
   constructor(
     private gameService: GamesService,
     private developerService: DevelopersService,
     private publisherService: PublishersService,
     private genreService: GenresService,
+    private gameXrefGenreService: GameXrefGenresService,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
-  ) {
-
-    this.loadAllInfo();
-
-  }
+  ) { }
 
   ngOnInit() {
+
+    this.gameForm = this.fb.group({
+      name: [''],
+      description: [''],
+      developerId: [''],
+      publisherId: [''],
+      genres: this.fb.array([])
+    });
+
+    zip(this.loadGame(), this.loadDevelopers(), this.loadPublishers(), this.loadGenres())
+      .subscribe(([game, developers, publishers, genres]) => {
+
+        this.game = game;
+        this.developers = developers;
+        this.publishers = publishers;
+        this.genres = genres;
+
+        this.initForm()
+
+      });
+
   }
 
-  updateGame(formGame: NgForm): void {
+  updateGame(): void {
 
-    if (formGame.form.status === "INVALID") return alert("fill all requied fields");
+    if (this.gameForm.invalid) { return alert('fill all requied fields')};
 
     let {
       name,
       description,
       developerId,
       publisherId,
-    } = formGame.form.value;
+      genres,
+    } = this.gameForm.value;
 
     let game: Game = {
       gameId: this.game.gameId,
@@ -64,66 +88,111 @@ export class GameEditorComponent implements OnInit {
       publisherId: Number(publisherId),
     };
 
-    if (!game.publisherId) delete(game.publisherId);
+    if (!game.publisherId) { delete(game.publisherId); }
+
+    console.log(this.updateGanresForGame());
 
     this.gameService.updateGame(game)
-      .subscribe(_ => {
-        this.loadAllInfo();
+    .pipe(switchMap(_ => this.updateGanresForGame()))
+    .pipe(switchMap(_ => this.loadGame()))
+    .subscribe(data => {
+      this.game = data;
     });
 
+
   }
 
-  deleteGame(game: Game) {
+  initForm(): void {
 
-    this.gameService.deleteGame(game.gameId)
-      .subscribe(_ => {
-        this.loadAllInfo();
+    this.gameForm.patchValue(this.game);
+
+    let checkedGenres = this.game.gameXrefGenre.map((genre) => genre.genreId);
+
+    let genresControl = this.fb.array([]);
+
+    this.genres.forEach((genre) => {
+
+      let isChecked = checkedGenres.includes(genre.genreId);
+      genresControl.push(this.fb.control(isChecked));
+
     });
 
-  }
-
-  loadAllInfo() {
-
-    this.loadDevelopers();
-    this.loadPublishers();
-    this.loadGenres();
-    this.loadGame();
+    this.gameForm.setControl('genres', genresControl);
 
   }
 
-  loadGame() {
+  loadGame(): Observable<Game> {
 
-    this.gameService.getGame(this.route.params['value'].id)
-      .subscribe((data) => {
-        this.game = data;
-      });
+    return this.gameService.getGame(this.route.params['value'].id);
 
   }
 
-  loadDevelopers() {
+  loadDevelopers(): Observable<Developer[]> {
 
-    this.developerService.getDevelopers()
-      .subscribe((data) => {
-        this.developers = data;
-      });
+    return this.developerService.getDevelopers();
 
   }
 
-  loadPublishers() {
+  loadPublishers(): Observable<Publisher[]> {
 
-    this.publisherService.getPublishers()
-      .subscribe((data) => {
-        this.publishers = data;
-      });
+    return this.publisherService.getPublishers();
 
   }
 
-  loadGenres() {
+  loadGenres(): Observable<Genre[]> {
 
-    this.genreService.getGenres()
-      .subscribe((data) => {
-        this.genres = data;
-      });
+    return this.genreService.getGenres();
+
+  }
+
+  updateGanresForGame() {
+
+    let idGame = this.game.gameId;
+    let diffArrayGenres = this.differceArrayGenres();
+
+    let observables = diffArrayGenres.map(item => {
+
+      if (item.action === 1) {
+
+        return this.gameXrefGenreService.addGenreForGame({
+          gameId: idGame,
+          genreId: item.genre.genreId
+        });
+
+      } else {
+
+        return this.gameXrefGenreService.deleteGenreFromGame(idGame, item.genre.genreId);
+
+      }
+
+    });
+
+    return zip(...observables);
+
+  }
+
+  private differceArrayGenres() {
+
+    let gameGenres = this.game.gameXrefGenre.map(genre => genre.genreId);
+    let genresForm = this.gameForm.value.genres;
+
+    let result = [];
+
+    this.genres.forEach((genre, i) => {
+
+      if (genresForm[i] && !gameGenres.includes(genre.genreId)) {
+
+        result.push({ action: 1, genre });
+
+      } else if (!genresForm[i] && gameGenres.includes(genre.genreId)) {
+
+        result.push({ action: -1, genre });
+
+      }
+
+    });
+
+    return result;
 
   }
 

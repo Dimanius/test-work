@@ -1,28 +1,34 @@
 <h2>Edit game</h2>
-<form #formGame="ngForm" (ngSubmit)="updateGame(formGame)">
+<form [formGroup]="gameForm" (ngSubmit)="updateGame()">
   <label>Game name*:
-    <input name="name" [ngModel]="game.name" required/>
+    <input name="name" formControlName="name" required/>
   </label>
   <label>Description*:
-    <input name="description" [ngModel]="game.description" required/>
+    <input name="description" formControlName="description" required/>
   </label>
-  <label>Developer*:
-    <select [ngModel]="game.developerId" name="developerId" required>
+  Developer*:
+    <select formControlName="developerId" name="developerId" required>
       <option *ngFor="let developer of developers"
-        [selected]="developer.developerId == game.developerId"
         [value]="developer.developerId">
         {{developer.name}}
       </option>
     </select>
-  </label>
-  <label>Publisher:
-    <select [ngModel]="game.publisherId" name="publisherId">
+  Publisher:
+    <select formControlName="publisherId" name="publisherId">
+      <option value="" selected></option>
       <option *ngFor="let publisher of publishers"
-        [value]="publisher.publisherId"
-        [selected]="publisher.publisherId == game.publisherId">
+        [value]="publisher.publisherId">
         {{publisher.name}}
       </option>
     </select>
-  </label>
-  <button type="submit">edit game</button>
+  Genres:
+    <div *ngFor="let genreContol of gameForm.controls.genres.controls; let i=index;">
+      <label formArrayName="genres">
+        <input
+          type="checkbox"
+          [formControlName]="i"/>
+          {{ genres[i].name }}
+      </label>
+    </div>
+    <button type="submit">edit game</button>
 </form>
